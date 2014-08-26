@@ -1,0 +1,69 @@
+<html>
+<head>
+<script type="text/javascript" src="auto-xsrf.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript">
+  
+  function getDivContent(id,msg) {
+    var http = new XMLHttpRequest();
+    http.onreadystatechange = function () {
+  	  if (http.readyState==4 && http.status==200) {
+        var resp = JSON.parse(http.responseText);
+        updateDiv(id,resp);
+  	  }
+    };
+    http.open('GET', 'validate_token.php?name='+id+'&msg='+encodeURIComponent(msg), true);
+    http.send();
+  }
+
+  function updateDiv(id,response) {
+  	if(response && response.error==="true"){
+  	 document.getElementById(id).innerHTML = response.error_msg;	
+  	} else {
+  	  	document.getElementById(id).innerHTML = response.greet + "</br>" + response.msg;
+  	}
+  	
+  }
+
+  getDivContent('ajaxDiv0','loaded via XMLHttpRequest in head tag');
+
+</script>
+
+<script type="text/javascript">
+
+function jQLoad(id,msg) {
+
+  $('#'+id).load('validate_token.php?name='+id+'&msg='+encodeURIComponent(msg), function(response, status, xhr) {
+    response = JSON.parse(response);
+    if(response && response.error==="true") {
+      $('#'+id).html(response.error_msg);
+    } else {
+      $('#'+id).html(response.greet + "</br>" + response.msg);  
+    }
+  });
+}
+
+</script>
+</head>
+<body>
+<h1>Form Secret</h1>
+<p><form id="secret" action="validate_token.php" method="POST">
+<input type="text" id="name" name="name" placeholder="name" /></br>
+<input type="text" id="msg" name="msg" placeholder="message" /></br>
+<input type="submit" name="Submit" value="Update" /> 
+</form></p>
+<p>
+	<div id="ajaxDiv0" name="ajaxDiv0"></div><br>
+</p>
+
+<p>
+	<div id="ajaxDiv1" name="ajaxDiv1"></div><br>
+	<button type="button" onclick="getDivContent('ajaxDiv1','loaded via XMLHttpRequest onclick event tag');">Update Div</button>
+</p>
+
+<p>
+  <div id="ajaxDiv2" name="ajaxDiv"></div><br>
+  <button type="button" onclick="jQLoad('ajaxDiv2','loaded via jQuery.load');">Update Div</button>
+</p>
+</body>
+</html>
