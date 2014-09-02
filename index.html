@@ -3,36 +3,27 @@
 <script type="text/javascript" src="auto-xsrf.js"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.js"></script>
 <script type="text/javascript">
-  
   function getDivContent(id,msg) {
     var http = new XMLHttpRequest();
     http.onreadystatechange = function () {
   	  if (http.readyState==4 && http.status==200) {
         var resp = JSON.parse(http.responseText);
         updateDiv(id,resp);
-  	  }
-    };
+  	  }};
     http.open('GET', 'validate_token.php?name='+id+'&msg='+encodeURIComponent(msg), true);
     http.send();
   }
-
   function updateDiv(id,response) {
   	if(response && response.error==="true"){
   	 document.getElementById(id).innerHTML = response.error_msg;	
   	} else {
   	  	document.getElementById(id).innerHTML = response.greet + "</br>" + response.msg;
-  	}
-  	
-  }
-
-  getDivContent('ajaxDiv0','loaded via XMLHttpRequest in head tag');
-
+  	}}
+getDivContent('ajaxDiv0','loaded via XMLHttpRequest in head tag');
 </script>
 
 <script type="text/javascript">
-
 function jQLoad(id,msg) {
-
   $('#'+id).load('validate_token.php?name='+id+'&msg='+encodeURIComponent(msg), function(response, status, xhr) {
     response = JSON.parse(response);
     if(response && response.error==="true") {
@@ -42,7 +33,6 @@ function jQLoad(id,msg) {
     }
   });
 }
-
 </script>
 </head>
 <body>
