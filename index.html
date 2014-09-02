@@ -48,20 +48,16 @@ function jQLoad(id,msg) {
 <body>
 <h1>Form Secret</h1>
 <p><form id="secret" action="validate_token.php" method="POST">
-<input type="text" id="name" name="name" placeholder="name" /></br>
-<input type="text" id="msg" name="msg" placeholder="message" /></br>
-<input type="submit" name="Submit" value="Update" /> 
+  <input type="text" id="name" name="name" placeholder="name" /></br>
+  <input type="text" id="msg" name="msg" placeholder="message" /></br>
+  <input type="submit" name="Submit" value="Update" /> 
 </form></p>
 <p>
-	<div id="ajaxDiv0" name="ajaxDiv0"></div><br>
-</p>
-
-<p>
-	<div id="ajaxDiv1" name="ajaxDiv1"></div><br>
-	<button type="button" onclick="getDivContent('ajaxDiv1','loaded via XMLHttpRequest onclick event tag');">Update Div</button>
-</p>
-
-<p>
+  <div id="ajaxDiv0" name="ajaxDiv0"></div><br>
+</p><p>
+  <div id="ajaxDiv1" name="ajaxDiv1"></div><br>
+  <button type="button" onclick="getDivContent('ajaxDiv1','loaded via XMLHttpRequest onclick event tag');">Update Div</button>
+</p><p>
   <div id="ajaxDiv2" name="ajaxDiv"></div><br>
   <button type="button" onclick="jQLoad('ajaxDiv2','loaded via jQuery.load');">Update Div</button>
 </p>
