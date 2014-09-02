@@ -9,7 +9,7 @@ if (!empty($_COOKIE['PHPSESSID'])) {
 
 	if ($_COOKIE['PHPSESSID'] === $_SESSION['username']) {
 		@$client_token = $incoming_token[array_search($server_token,$incoming_token)];
-		if ($client_token === $server_token)) {
+		if ($client_token === $server_token) {
 			echo print_response($_SERVER['REQUEST_METHOD']);
 		}
 		else {
