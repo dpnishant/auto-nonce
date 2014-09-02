@@ -52,8 +52,8 @@ function print_response ($method) {
 function print_error ($method) {
   $headers = getallheaders();
   $client_token = isset($headers['X-CSRF-Token']) ? $headers['X-CSRF-Token'] : "null";
-  $client_token = isset($_POST['_csrf']) ? ? htmlentities((string)$_POST['_csrf']) : "null";
-  $client_token = isset($_GET['_csrf']) ? ? htmlentities((string)$_GET['_csrf']) : "null";
+  $client_token = isset($_POST['_csrf']) ? htmlentities($_POST['_csrf']) : "null";
+  $client_token = isset($_GET['_csrf']) ? htmlentities($_GET['_csrf']) : "null";
   $error = array('error' => 'true', 
         'error_msg' => 'Client Token: '.$client_token.
         '<br>Server Token: '.$server_token);
