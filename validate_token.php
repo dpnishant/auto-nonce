@@ -34,14 +34,14 @@ if (isset($_COOKIE['PHPSESSID']) && isset($_SESSION['username'])) {
 // Function to return a JSON reponse if validation is successful.
 function print_response ($method) {
   if ($method === 'GET') {
-    $name = htmlentities(isset($_GET['name'])) ? htmlentities($_GET['name']) : "default_name";
-    $msg = htmlentities(isset($_GET['msg'])) ? htmlentities($_GET['msg']) : "default_message";
+    $name = htmlentities(isset($_GET['name'])) ? htmlentities((string)$_GET['name']) : "default_name";
+    $msg = htmlentities(isset($_GET['msg'])) ? htmlentities((string)$_GET['msg']) : "default_message";
     $response = array('greet' => 'Hello, '.$name, 'msg' => $msg);
     header('Content-Type: application/json');
     return json_encode($response);
   } elseif ($method === 'POST') {
-    $name = htmlentities(isset($_POST['name'])) ? htmlentities($_POST['name']) : "default_name";
-    $msg = htmlentities(isset($_POST['msg'])) ? htmlentities($_POST['msg']) : "default_message";
+    $name = htmlentities(isset($_POST['name'])) ? htmlentities((string)$_POST['name']) : "default_name";
+    $msg = htmlentities(isset($_POST['msg'])) ? htmlentities((string)$_POST['msg']) : "default_message";
     $response = array('greet' => 'Hello, '.$name, 'msg' => $msg);
     header('Content-Type: application/json');
     return json_encode($response);
@@ -52,11 +52,12 @@ function print_response ($method) {
 function print_error ($method) {
   $headers = getallheaders();
   $client_token = isset($headers['X-CSRF-Token']) ? $headers['X-CSRF-Token'] : "null";
-  $client_token = isset($_POST['_csrf']) ? isset($_POST['_csrf']) : "null";
-  $client_token = isset($_GET['_csrf']) ? isset($_GET['_csrf']) : "null";
+  $client_token = isset($_POST['_csrf']) ? ? htmlentities((string)$_POST['_csrf']) : "null";
+  $client_token = isset($_GET['_csrf']) ? ? htmlentities((string)$_GET['_csrf']) : "null";
   $error = array('error' => 'true', 
         'error_msg' => 'Client Token: '.$client_token.
         '<br>Server Token: '.$server_token);
-  return json_encode($error);  
+  header('Content-Type: application/json');
+  return json_encode($error);
 }
 ?>
