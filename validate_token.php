@@ -1,7 +1,8 @@
 <?php
 session_start();
 $headers = getallheaders();
-$server_token = substr(hash('md5', $_SESSION['username'].'$2$y$n0nc3'), 4, 8);
+$salt = '$2$y$n0nc3';
+$server_token = substr(hash('md5', $_SESSION['username'].$salt), 4, 8);
 $incoming_token = array($headers['X-CSRF-Token'],$_POST['_csrf'],$_GET['_csrf']);
 $client_token = null;
 // Validation routine
@@ -45,8 +46,6 @@ function print_response ($method) {
 // Function to return a JSON error if validation is unsuccessful.
 function print_error ($method) {
 	global $server_token, $client_token;
-	$headers = getallheaders();
-
 	$error = array('error' => 'true',
 		'error_msg' => 'Client Token: '.$client_token.
 		'<br>Server Token: '.$server_token);
