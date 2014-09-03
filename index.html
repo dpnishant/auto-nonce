@@ -1,6 +1,5 @@
 <html>
 <head>
-<script type="text/javascript" src="purify.js"></script>
 <script type="text/javascript" src="auto-xsrf.js"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.js"></script>
 <script type="text/javascript">
@@ -16,9 +15,9 @@
   }
   function updateDiv(id,response) {
   	if(response && response.error==="true"){
-  	 document.getElementById(id).innerHTML = DOMPurify.sanitize(response.error_msg);	
+  	 document.getElementById(id).innerHTML = response.error_msg;	
   	} else {
-  	  	document.getElementById(id).innerHTML = DOMPurify.sanitize(response.greet) + "</br>" + DOMPurify.sanitize(response.msg);
+  	  	document.getElementById(id).innerHTML = response.greet + "</br>" + response.msg;
   	}}
 getDivContent('ajaxDiv0','loaded via XMLHttpRequest in head tag');
 </script>
@@ -28,9 +27,9 @@ function jQLoad(id,msg) {
   $('#'+id).load('validate_token.php?name='+id+'&msg='+encodeURIComponent(msg), function(response, status, xhr) {
     response = JSON.parse(response);
     if(response && response.error==="true") {
-      $('#'+id).html(DOMPurify.sanitize(response.error_msg));
+      $('#'+id).html(response.error_msg);
     } else {
-      $('#'+id).html(DOMPurify.sanitize(response.greet) + "</br>" + DOMPurify.sanitize(response.msg));  
+      $('#'+id).html(response.greet + "</br>" + response.msg);  
     }
   });
 }
