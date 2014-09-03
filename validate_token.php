@@ -3,7 +3,7 @@ session_start();
 $headers = getallheaders();
 $salt = '$2$y$n0nc3';
 $server_token = substr(hash('md5', $_SESSION['username'].$salt), 4, 8);
-$incoming_token = array($headers['X-CSRF-Token'],$_POST['_csrf'],$_GET['_csrf']);
+@$incoming_token = array($headers['X-CSRF-Token'],$_POST['_csrf'],$_GET['_csrf']);
 $client_token = null;
 // Validation routine
 if (!empty($_COOKIE['PHPSESSID'])) {
