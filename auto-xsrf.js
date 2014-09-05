@@ -2,26 +2,28 @@ Settings = {
 	'token_url': "get_token.php",
 	'token_name': "csrf_token",
 	'token_value': "default_value",
-	'ajax_header_name': 'X-CSRF-Token',
-	'check_origin': false
+  'ajax_header_name': 'X-CSRF-Token',
+  'check_origin': false
 };
 
 
 function injectFormTokens() {
   var host = location.href.replace(/^(http?.:\/\/)/gi,"").split("/")[0];
   var forms = document.getElementsByTagName('form');
-  var csrf_tag = document.createElement('input');
-  csrf_tag.setAttribute('type', 'hidden');
-  csrf_tag.setAttribute('id', Settings.token_name);
-  csrf_tag.setAttribute('name', Settings.token_name);
-  csrf_tag.setAttribute('value', Settings.token_value);
   for(var i=0;i<forms.length;i++) {
+    var csrf_tag = document.createElement('input');
+    csrf_tag.setAttribute('type', 'hidden');
+    csrf_tag.setAttribute('id', Settings.token_name);
+    csrf_tag.setAttribute('name', Settings.token_name);
+    csrf_tag.setAttribute('value', Settings.token_value);
     if (Settings.check_origin === false) {
         forms[i].appendChild(csrf_tag);
+        alert(forms[i].innerHTML);
     } else {
       var form_action = forms[i].action.replace(/^(http?.:\/\/)/gi,"").split("/")[0];
       if (form_action === host) {
         forms[i].appendChild(csrf_tag);
+        alert(forms[i].innerHTML);
       }
     }
   }};
