@@ -1,7 +1,7 @@
 lib_autononce 
 ==============
 
-lib_autononce is an experimental framework for automatic addition of anti-cross-site-request-forgery nonces to web applications via client side DOM manipulation. This can be a starting point to implement anti-xsrf protection at the framework level and not requiring developers to make changes in each vulnerable page. This is a very simple implementation can be ported (currently in PHP) to virtually any programming stack
+lib_autononce is an experimental framework for automatic addition of anti-cross-site-request-forgery nonces to web applications via client side DOM manipulation. This can be a starting point to implement anti-xsrf protection at the framework level and not requiring developers to make changes in each vulnerable page. This is a very simple implementation can be ported (currently in PHP) to virtually any programming stack.
 
 Documentation
 =============
