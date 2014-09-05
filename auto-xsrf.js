@@ -2,8 +2,8 @@ Settings = {
 	'token_url': "get_token.php",
 	'token_name': "csrf_token",
 	'token_value': "default_value",
-  'ajax_header_name': 'X-CSRF-Token',
-  'check_origin': false
+	'ajax_header_name': 'X-CSRF-Token',
+	'check_origin': false
 };
 
 
