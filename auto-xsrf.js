@@ -22,7 +22,6 @@ function injectFormTokens() {
       var form_action = forms[i].action.replace(/^(http?.:\/\/)/gi,"").split("/")[0];
       if (form_action === host) {
         forms[i].appendChild(csrf_tag);
-        alert(forms[i].innerHTML);
       }
     }}
 };
