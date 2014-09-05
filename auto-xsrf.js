@@ -25,8 +25,8 @@ function injectFormTokens() {
         forms[i].appendChild(csrf_tag);
         alert(forms[i].innerHTML);
       }
-    }
-  }};
+    }}
+};
 
 function getToken() {
   var http = new XMLHttpRequest();
