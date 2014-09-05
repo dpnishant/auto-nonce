@@ -18,7 +18,6 @@ function injectFormTokens() {
     csrf_tag.setAttribute('value', Settings.token_value);
     if (Settings.check_origin === false) {
         forms[i].appendChild(csrf_tag);
-        alert(forms[i].innerHTML);
     } else {
       var form_action = forms[i].action.replace(/^(http?.:\/\/)/gi,"").split("/")[0];
       if (form_action === host) {
