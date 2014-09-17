@@ -22,12 +22,12 @@ function injectFormTokens() {
   for(var i=0;i<forms.length;i++) {
     var token = prepareToken();
     if (Settings.post_only === true) {
-      if (forms[i].method.toUpperCase() === 'POST') { forms[i].appendChild(token); } else { forms[i].removeChild(token); }
+      if (forms[i].method.toUpperCase() === 'POST') { forms[i].appendChild(token); } else { if(forms[i].elements[token]) { forms[i].removeChild(token); }}
     } else { forms[i].appendChild(token); }
 
     if (Settings.match_origin === true) {
         var form_action = forms[i].action.replace(/^(http?.:\/\/)/gi,"").split("/")[0];
-        if (form_action === host) { forms[i].appendChild(token); } else { forms[i].removeChild(token); }
+        if (form_action === host) { forms[i].appendChild(token); } else { if(forms[i].elements[token]) { forms[i].removeChild(token); }}
     } else { forms[i].appendChild(token); }
   }
 };
@@ -53,6 +53,12 @@ function csrf_init() {
 function overloadXHR() {
   var overloadedXHROpen = XMLHttpRequest.prototype.open;
   XMLHttpRequest.prototype.open = function(a,b,c,d,e) {
+    if (Settings.match_origin === true) {
+      if (b.indexOf("http://") === 0 || b.indexOf("https://") === 0 || b.indexOf("//") === 0) {
+        overloadedXHROpen.call(this,a,b,c,d);
+        return;    
+      }
+    }
     overloadedXHROpen.call(this,a,b,c,d);
     this.setRequestHeader(Settings.ajax_header_name, Settings.token_value);
     return;
