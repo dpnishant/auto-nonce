@@ -36,14 +36,20 @@ function jQLoad(id,msg) {
 </script>
 </head>
 <body>
-<p><h1>Same-Origin Form "Secret"</h1>
+<p><h1>POST Same-Origin Form "Secret"</h1>
 <form id="secret" action="validate_token.php" method="POST">
   <input type="text" id="name" name="name" placeholder="name" /></br>
   <input type="text" id="msg" name="msg" placeholder="message" /></br>
-  <input type="submit" name="Submit" value="Update" /> 
+  <input type="submit" name="Submit" value="Update" />
 </form></p>
 <p><h1>Cross Origin Form "x-domain"</h1>
 <form id="x-domain" action="http://example.com/demo.asp" method="POST">
+  <input type="text" id="name" name="name" placeholder="name" /></br>
+  <input type="text" id="msg" name="msg" placeholder="message" /></br>
+  <input type="submit" name="Submit" value="Update" />
+</form></p>
+<p><h1>GET Same-Origin Form "Secret"</h1>
+<form id="secret" action="validate_token.php" method="GET">
   <input type="text" id="name" name="name" placeholder="name" /></br>
   <input type="text" id="msg" name="msg" placeholder="message" /></br>
   <input type="submit" name="Submit" value="Update" />
