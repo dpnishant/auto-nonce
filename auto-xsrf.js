@@ -22,23 +22,14 @@ function injectFormTokens() {
   for(var i=0;i<forms.length;i++) {
     var token = prepareToken();
     if (Settings.post_only === true) {
-      if (forms[i].method.toUpperCase() === 'POST') { 
-        forms[i].appendChild(token); 
-      } else { 
-        forms[i].removeChild(token);
-      }
+      if (forms[i].method.toUpperCase() === 'POST') { forms[i].appendChild(token); } else { forms[i].removeChild(token); }
     } else { forms[i].appendChild(token); }
 
     if (Settings.match_origin === true) {
         var form_action = forms[i].action.replace(/^(http?.:\/\/)/gi,"").split("/")[0];
-        if (form_action === host) {
-          forms[i].appendChild(token);
-        } else { forms[i].removeChild(token); } 
-    } 
-    else {
-      forms[i].appendChild(token);
-    }
-  };
+        if (form_action === host) { forms[i].appendChild(token); } else { forms[i].removeChild(token); }
+    } else { forms[i].appendChild(token); }
+  }
 };
 
 function getToken() {
