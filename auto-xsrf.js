@@ -52,14 +52,14 @@ function csrf_init() {
 
 function overloadXHR() {
   var overloadedXHROpen = XMLHttpRequest.prototype.open;
-  XMLHttpRequest.prototype.open = function(a,b,c,d,e) {
+  XMLHttpRequest.prototype.open = function(a, b, c, d, e) {
     if (Settings.match_origin === true) {
       if (b.indexOf("http://") === 0 || b.indexOf("https://") === 0 || b.indexOf("//") === 0) {
         overloadedXHROpen.call(this,a,b,c,d);
         return;    
       }
     }
-    overloadedXHROpen.call(this,a,b,c,d);
+    overloadedXHROpen.call(this, a, b, c, d);
     this.setRequestHeader(Settings.ajax_header_name, Settings.token_value);
     return;
 }};
