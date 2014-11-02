@@ -24,4 +24,4 @@ This is a test static HTML file that can be used for testing the working of the 
 
 *validate_token.php*
 
-This script compares the incoming client token, if any, and validates with the server token and returns a JSON response (or error) back to the client..
+This script compares the incoming client token, if any, and validates with the server token and returns a JSON response (or error) back to the client.
